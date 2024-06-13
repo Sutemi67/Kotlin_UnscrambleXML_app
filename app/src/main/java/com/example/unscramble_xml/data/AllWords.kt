@@ -5,6 +5,6 @@ import com.example.unscramble_xml.R
 val usedWords: MutableSet<String> = mutableSetOf()
 
 val allWords: Set<String> = setOf(
-    "${R.string.word1}",
-    "${R.string.word2}"
+    "один",
+    "два"
 )

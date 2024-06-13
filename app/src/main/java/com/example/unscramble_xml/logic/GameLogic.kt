@@ -23,3 +23,7 @@ fun pickWordAndShuffle(): String {
         scrambleWord(currentWord)
     }
 }
+
+fun applyAnswer(){
+
+}
