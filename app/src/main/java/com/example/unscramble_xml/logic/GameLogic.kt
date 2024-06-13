@@ -1,7 +1,5 @@
 package com.example.unscramble_xml.logic
 
-import android.content.Context
-import android.view.View
 import android.widget.Toast
 import com.example.unscramble_xml.MainActivity
 import com.example.unscramble_xml.data.allWords
@@ -20,9 +18,9 @@ fun scrambleWord(word: String): String {
     return String(word2)
 }
 
-fun pickWordAndShuffle(activity: MainActivity) {
+fun pickWordAndShuffle(activity: MainActivity): String {
     currentWord = allWords.random()
-    if (usedWords.contains(currentWord)) {
+    return if (usedWords.contains(currentWord)) {
         if (endCounter == allWords.size) {
             Toast.makeText(
                 getActivity(activity),
@@ -30,7 +28,7 @@ fun pickWordAndShuffle(activity: MainActivity) {
                 Toast.LENGTH_LONG
             ).show()
             activity.gameIsOn = false
-            return
+            return "END"
         }
         pickWordAndShuffle(activity)
     } else {

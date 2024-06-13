@@ -1,8 +1,6 @@
 package com.example.unscramble_xml
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.InputFilter.AllCaps
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.unscramble_xml.logic.currentWord
 import com.example.unscramble_xml.logic.pickWordAndShuffle
-import com.google.android.material.internal.ContextUtils.getActivity
 
 class MainActivity : AppCompatActivity() {
     var gameIsOn = true
@@ -31,30 +28,33 @@ class MainActivity : AppCompatActivity() {
         val input = findViewById<EditText>(R.id.inputTextField)
         val applyButton = findViewById<Button>(R.id.applyButton)
         val skipButton = findViewById<Button>(R.id.skipButton)
+        val finishButton = findViewById<Button>(R.id.buttonFinish)
         val counterScore = findViewById<TextView>(R.id.counter)
         var counter = 0
 
+        answerWord.text = pickWordAndShuffle(this)
 
-        answerWord.text = pickWordAndShuffle(this).toString()
-
-        while (gameIsOn) {
-            skipButton.setOnClickListener {
-                pickWordAndShuffle(this)
-            }
-
-            applyButton.setOnClickListener {
-                if (input.text.toString() == currentWord) {
-                    counter++
-                    counterScore.text = counter.toString()
-                    answerWord.text = pickWordAndShuffle(this).toString()
-                    input.text.clear()
-                } else {
-                    Toast.makeText(this, "Неверно!", 1).show()
-                    input.text.clear()
-                }
+        skipButton.setOnClickListener {
+            pickWordAndShuffle(this)
+        }
+        applyButton.setOnClickListener {
+            if (input.text.toString() == currentWord) {
+                counter++
+                counterScore.text = counter.toString()
+                answerWord.text = pickWordAndShuffle(this)
+                input.text.clear()
+            } else {
+                Toast.makeText(this, "Неверно!", 1).show()
+                input.text.clear()
             }
         }
-        answerWord.text = "Игра окончена"
-        input.visibility = View.GONE
+
+        if (!gameIsOn){
+            skipButton.visibility = View.GONE
+            applyButton.visibility = View.GONE
+            finishButton.visibility = View.VISIBLE
+            finishButton.setOnClickListener{finish()}
+        }
     }
 }
+
