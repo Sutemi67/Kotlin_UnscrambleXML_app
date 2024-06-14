@@ -1,5 +1,6 @@
 package com.example.unscramble_xml.logic
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import com.example.unscramble_xml.MainActivity
 import com.example.unscramble_xml.data.allWords
@@ -18,6 +19,7 @@ fun scrambleWord(word: String): String {
     return String(word2)
 }
 
+@SuppressLint("RestrictedApi")
 fun pickWordAndShuffle(activity: MainActivity): String {
     currentWord = allWords.random()
     return if (usedWords.contains(currentWord)) {

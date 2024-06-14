@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 answerWord.text = pickWordAndShuffle(this)
                 input.text.clear()
             } else {
-                Toast.makeText(this, "Неверно!", 1).show()
+                Toast.makeText(this, "Неверно!", Toast.LENGTH_LONG).show()
                 input.text.clear()
             }
         }
